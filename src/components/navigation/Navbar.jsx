@@ -1,17 +1,19 @@
 import logo from "../../assets/images/logo.png";
 import CustomButton from "../button/Button";
 import "./navigation.css";
+import PropTypes from "prop-types";
+
 const Navbar = ({ isBackground = false }) => {
   return (
     <nav
       className={`${
         isBackground ? "bg-[#0E1A34]" : "bg-transparent absolute top-0 "
-      } w-full z-10  navigation`}
+      } w-full z-10 navigation`}
     >
-      <div className="flex justify-between items-center h-20 ww-ful ">
+      <div className="flex justify-between items-center h-20 w-full">
         {/* Logo and Navigation Links */}
         <div className="flex items-center justify-between w-[50%]">
-          <div className="w-150 ">
+          <div className="w-150">
             <img
               src={logo}
               alt="MyDocta Logo"
@@ -22,10 +24,10 @@ const Navbar = ({ isBackground = false }) => {
             <a href="/" className="text-white font-medium hover:text-gray-400">
               Home
             </a>
-            <a href="/services" className="text-white/80 hover:text-white">
+            <a href="/" className="text-white/80 hover:text-white">
               Services
             </a>
-            <a href="/mydoctor" className="text-white/80 hover:text-white">
+            <a href="/" className="text-white/80 hover:text-white">
               MyDoctor
             </a>
           </div>
@@ -33,11 +35,15 @@ const Navbar = ({ isBackground = false }) => {
 
         {/* Health Status Button */}
         <div className="mr-[10%]">
-          <CustomButton to="myhealth" text="My Health Status" />
+          <CustomButton to="myHealth" text="My Health Status" />
         </div>
       </div>
     </nav>
   );
+};
+
+Navbar.propTypes = {
+  isBackground: PropTypes.bool,
 };
 
 export default Navbar;

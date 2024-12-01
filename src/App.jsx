@@ -1,6 +1,5 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Home from "./components/home/Home";
-
 
 // Placeholder components for protected routes
 // import AdminRoute from "./components/auth/AdminRoute";
@@ -13,8 +12,8 @@ import GetScreened from "./components/home/home_lower_section/dynamic_parts/GetS
 import CancerRisks from "./components/home/home_lower_section/dynamic_parts/CancerRisks";
 import ReduceRisks from "./components/home/home_lower_section/dynamic_parts/ReduceRisks";
 import Symptoms from "./components/home/home_lower_section/dynamic_parts/symptoms";
-import MyHealthStatus from "./components/myHealth/MyHealthStatus";
-// import Nearhospital from "./components/facilities/Nearhospital";
+
+
 import HealthFacilityFinder from "./components/facilities/Finder";
 import WhyScreening from "./components/home/home_lower_section/dynamic_parts/WhyScreening";
 
@@ -32,8 +31,8 @@ export default function App() {
         <Route path="whyScreening" element={<WhyScreening />} />
         <Route path="symptoms" element={<Symptoms />} />
       </Route>
-      <Route path="myhealth" element={<MyHealthStatus />} />
-      <Route path="/nearhospital" element={<HealthFacilityFinder />} />
+      <Route path="/myHealth" element={<myHealthStatus />} />
+      <Route path="/nearHospital" element={<HealthFacilityFinder />} />
       {/* Auth Protected Routes */}
       {/* <Route element={<AuthRoute />}>
           <Route path="profile" element={<ProfilePage />} />

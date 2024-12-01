@@ -11,20 +11,19 @@ function Lower_home() {
     { name: "Get screened", to: "/get-screened" },
     { name: "Why Screening ?", to: "/whyScreening" },
     { name: "Cervical Cancer risks", to: "/cancer-risks" },
-    { name: "Reduce Risks", to: "/reduce-risks" },
+    // { name: "Reduce Risks", to: "/reduce-risks" },
     { name: "Symptoms", to: "/symptoms" },
-    { name: ">", to: "/more" },
+    { name: ">", to: "/" },
   ];
 
   // Function to handle active link change on click
   const handleLinkClick = (link) => {
     setActiveLink(link);
-
   };
 
   return (
     <>
-      <nav className="navbar">
+      <nav className="navbar pt-10">
         <ul className="nav-list flex justify-evenly">
           {navItems.map((item) => (
             <li key={item.to} className="nav-item ">
@@ -32,7 +31,7 @@ function Lower_home() {
                 to={item.to}
                 className={`nav-link  text-xl ${
                   activeLink === item.to
-                    ? "text-[#B2871C] font-extrabold LexendDeca"
+                    ? "text-[#B2871C] font-extrabold lexendDeca"
                     : "active-link PlayFair"
                 }`}
                 onClick={() => handleLinkClick(item.to)} // Update active link on click
@@ -43,12 +42,12 @@ function Lower_home() {
           ))}
         </ul>
       </nav>
-      <div className="h-96 py-10">
+      <div className="min-h-96 py-10">
         <Outlet />
       </div>
       <div className="flex items-center justify-center h-full pb-4">
         <span className="PlayFair text-[#BB8C1A] mx-auto w-fit custom-underline font-bold">
-          <NavLink to="nearhospital">Visit nearest Facility</NavLink>
+          <NavLink to="nearHospital">Visit nearest Facility</NavLink>
         </span>
       </div>
 

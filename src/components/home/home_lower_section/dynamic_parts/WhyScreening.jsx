@@ -3,7 +3,7 @@
 function WhyScreening() {
   return (
     <>
-      <div className="flex  gap-3">
+      <div className="flex  gap-8  w-[80%] mx-auto mt-11">
         <div
           className="w-3  "
           style={{
@@ -15,20 +15,21 @@ function WhyScreening() {
         <div>
           <p className="text-[#015F2A] playFair font-black  text-4xl">
             When cervical cancer is diagnosed at an early stage,
-            <br /> the  chance of living  is 91%.
+            <br /> the chance of living is 91%.
           </p>
           <p
             className="
-          text-[#0d1831] text-2xl"
+          text-[#0d1831] text-2xl block mt-4"
           >
             When cervical cancer is diagnosed after it has spread to nearby
             tissues, organs,
-            <br /> or regional lymph nodes, the  chance of living is 60%.
+            <br /> or regional lymph nodes, the chance of living is 60%.
           </p>
-          <p className=" text-[#FF0004] text-2xl">
+          <p className=" text-[#FF0004] text-2xl block mt-4">
             {" "}
             When cervical cancer is diagnosed after it has spread to a distant
-            part of the body,<br/> the  chance of living is 19%.       
+            part of the body,
+            <br /> the,chance of living is 19%.
           </p>
         </div>
       </div>

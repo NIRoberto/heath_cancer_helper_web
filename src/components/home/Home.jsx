@@ -40,7 +40,7 @@ const HomePage = () => {
                   screening assistance.
                 </p>
                 <CustomButton
-                  to="contact"
+                  to="nearHospital"
                   text="Talk to MyDocta"
                   isBold={true}
                 />

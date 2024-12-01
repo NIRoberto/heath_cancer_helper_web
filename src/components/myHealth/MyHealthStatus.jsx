@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
-const MyHealthStatus = () => {
-  return (
-    <div>MyHealthStatus</div>
-  )
-}
+const myHealthStatus = () => {
+  return <div>myHealthStatus</div>;
+};
 
-export default MyHealthStatus
+export default myHealthStatus;

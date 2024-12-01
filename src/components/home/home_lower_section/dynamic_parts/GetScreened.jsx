@@ -7,7 +7,7 @@ function GetScreened() {
 
   return (
     <>
-      <div className="flex items-center space-x-4 custom-timeline-item justify-center">
+      <div className="flex items-center space-x-1 custom-timeline-item justify-center">
         {timelineData.map((item, index) => (
           <div className="flex flex-col" key={index}>
             <div className="flex gap-1 items-center ml-2">
@@ -28,7 +28,7 @@ function GetScreened() {
           </div>
         ))}
       </div>
-      <div className="LexendDeca text-[29px] w-[80%] mx-auto text-start mt-11">
+      <div className="lexendDeca text-[29px] w-[80%] mx-auto text-start mt-11">
         <span className="font-bold">Cervical cancer screening </span>
         typically <span className="font-bold">starts at 30 years</span> of age{" "}
         <br />
