@@ -13,7 +13,6 @@ import CancerRisks from "./components/home/home_lower_section/dynamic_parts/Canc
 import ReduceRisks from "./components/home/home_lower_section/dynamic_parts/ReduceRisks";
 import Symptoms from "./components/home/home_lower_section/dynamic_parts/symptoms";
 
-
 import HealthFacilityFinder from "./components/facilities/Finder";
 import WhyScreening from "./components/home/home_lower_section/dynamic_parts/WhyScreening";
 
@@ -24,7 +23,7 @@ export default function App() {
       <Route path="/" element={<Home />}>
         {/* <Route path="/" element={<HealthFacilityFinder />}> */}
         <Route index element={<GetScreened />} />
-        {/* Nested Routes for content inside Home */}
+
         <Route path="get-screened" element={<GetScreened />} />
         <Route path="cancer-risks" element={<CancerRisks />} />
         <Route path="reduce-risks" element={<ReduceRisks />} />
