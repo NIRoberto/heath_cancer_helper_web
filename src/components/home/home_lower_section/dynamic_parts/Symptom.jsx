@@ -1,6 +1,5 @@
-
 import bloodSign from "../../../../assets/images/bloodSign.png";
-function Symptoms() {
+const Symptom = () => {
   // Dummy data for items
   const items = [
     {
@@ -43,6 +42,6 @@ function Symptoms() {
       </div>
     </div>
   );
-}
+};
 
-export default Symptoms;
+export default Symptom;

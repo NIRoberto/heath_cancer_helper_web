@@ -11,10 +11,11 @@ import Home from "./components/home/Home";
 import GetScreened from "./components/home/home_lower_section/dynamic_parts/GetScreened";
 import CancerRisks from "./components/home/home_lower_section/dynamic_parts/CancerRisks";
 import ReduceRisks from "./components/home/home_lower_section/dynamic_parts/ReduceRisks";
-import Symptoms from "./components/home/home_lower_section/dynamic_parts/symptoms";
 
 import HealthFacilityFinder from "./components/facilities/Finder";
 import WhyScreening from "./components/home/home_lower_section/dynamic_parts/WhyScreening";
+import Symptom from "./components/home/home_lower_section/dynamic_parts/Symptom";
+
 
 export default function App() {
   return (
@@ -28,7 +29,7 @@ export default function App() {
         <Route path="cancer-risks" element={<CancerRisks />} />
         <Route path="reduce-risks" element={<ReduceRisks />} />
         <Route path="whyScreening" element={<WhyScreening />} />
-        <Route path="symptoms" element={<Symptoms />} />
+        <Route path="symptoms" element={<Symptom />} />
       </Route>
       <Route path="/myHealth" element={<myHealthStatus />} />
       <Route path="/nearHospital" element={<HealthFacilityFinder />} />
