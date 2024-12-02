@@ -1,13 +1,11 @@
-import Navbar from "../navigation/Navbar";
-import { facilities } from "./facilities";
-
-
+import FacilityList from "./FacilityList ";
+import FilterButton from "./FilterButton ";
 import MapView from "./MapView";
+import Navbar from "../navigation/Navbar";
+import SearchBar from "./SearchBar ";
 import { Clock, Filter } from "lucide-react";
 import { useState } from "react";
-import SearchBar from "./SearchBar ";
-import FilterButton from "./FilterButton ";
-import FacilityList from "./FacilityList ";
+import { facilities } from "./facilities";
 
 const HealthFacilityFinder = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -56,7 +54,7 @@ const HealthFacilityFinder = () => {
           />
         </div>
         {/* Map Section */}
-        <div className="flex-1 relative">
+        <div className="flex-1 relativde">
           <MapView
             facilities={filteredFacilities}
             selectedFacility={selectedFacility}
