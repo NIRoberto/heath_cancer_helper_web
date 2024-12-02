@@ -3,15 +3,15 @@ import { Search } from "lucide-react";
 
 const SearchBar = ({ placeholder, value, onChange }) => {
   return (
-    <div className="relative">
+    <div className="flex items-center justify-center border rounded px-3">
       <input
         type="text"
         placeholder={placeholder}
-        className="w-full p-2 pr-10 border rounded"
+        className="w-full p-2 pr-10 outline-none"
         value={value}
         onChange={onChange}
       />
-      <Search className="absolute right-3 top-2.5 text-gray-400" size={20} />
+      <Search className=" text-gray-400" size={20} />
     </div>
   );
 };

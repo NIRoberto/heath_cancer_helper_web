@@ -1,40 +1,79 @@
-import { useState } from "react"; // Import useState
-import { NavLink, Outlet } from "react-router-dom"; // Import NavLink
-
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
 import "./Lower_home.css";
-function Lower_home() {
-  // Use useState to manage active link state
-  const [activeLink, setActiveLink] = useState("/get-screened");
+import CancerRisks from "./dynamic_parts/CancerRisks";
+import GetScreened from "./dynamic_parts/GetScreened";
+import ReduceRisks from "./dynamic_parts/ReduceRisks";
+import Slider from "react-slick";
+import Symptom from "./dynamic_parts/Symptom";
+import WhyScreening from "./dynamic_parts/WhyScreening";
+import { useEffect, useRef, useState } from "react";
+import { CiMenuBurger } from "react-icons/ci";
+import { NavLink } from "react-router-dom";
 
-  // Define the nav items
+function Lower_home() {
+  const [activeLink, setActiveLink] = useState("/get-screened");
+  const [location, setLocation] = useState({ latitude: null, longitude: null }); // Store client location
+  const sliderRef = useRef(null);
+
+  useEffect(() => {
+    // Capture client's location
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setLocation({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          });
+        },
+        (error) => {
+          console.error("Error fetching location:", error.message);
+        }
+      );
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+    }
+  }, []);
+
+  const settings = {
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    speed: 2000,
+    autoplaySpeed: 4000,
+    cssEase: "linear",
+    beforeChange: (current, next) => {
+      setActiveLink(navItems[next].to);
+    },
+  };
+
   const navItems = [
     { name: "Get screened", to: "/get-screened" },
     { name: "Why Screening ?", to: "/whyScreening" },
     { name: "Cervical Cancer risks", to: "/cancer-risks" },
-    // { name: "Reduce Risks", to: "/reduce-risks" },
     { name: "Symptoms", to: "/symptoms" },
-    { name: ">", to: "/" },
   ];
 
-  // Function to handle active link change on click
-  const handleLinkClick = (link) => {
-    setActiveLink(link);
+  const handleLinkClick = (index) => {
+    setActiveLink(navItems[index].to);
+    sliderRef.current.slickGoTo(index);
   };
 
   return (
     <>
-      <nav className="navbar pt-10">
-        <ul className="nav-list flex justify-evenly">
-          {navItems.map((item) => (
-            <li key={item.to} className="nav-item ">
+      <nav className="navbar pt-10 flex justify-center">
+        <ul className="nav-list grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 justify-items-center">
+          {navItems.map((item, index) => (
+            <li key={item.to} className="nav-item">
               <NavLink
                 to={item.to}
-                className={`nav-link  text-xl ${
+                className={`nav-link text-xl ${
                   activeLink === item.to
                     ? "text-[#B2871C] font-extrabold lexendDeca"
                     : "active-link PlayFair"
                 }`}
-                onClick={() => handleLinkClick(item.to)} // Update active link on click
+                onClick={() => handleLinkClick(index)}
               >
                 {item.name}
               </NavLink>
@@ -42,16 +81,35 @@ function Lower_home() {
           ))}
         </ul>
       </nav>
-      <div className="min-h-96 py-10">
-        <Outlet />
+
+      <div className="pt-10 overflow-x-hidden">
+        <div className="slider-container">
+          <Slider {...settings} ref={sliderRef}>
+            <GetScreened />
+            <WhyScreening />
+            <CancerRisks />
+            <Symptom />
+          </Slider>
+        </div>
       </div>
-      <div className="flex items-center justify-center h-full pb-4">
+
+      <div className="flex items-center justify-center pb-4">
         <span className="PlayFair text-[#BB8C1A] mx-auto w-fit custom-underline font-bold">
           <NavLink to="nearHospital">Visit nearest Facility</NavLink>
         </span>
       </div>
 
-      {/* <WaveDivider /> */}
+      {/* Display captured location */}
+      <div className="location-display mt-4 text-center">
+        {location.latitude && location.longitude ? (
+          <p className="text-sm">
+            Your current location: Latitude: {location.latitude}, Longitude:{" "}
+            {location.longitude}
+          </p>
+        ) : (
+          <p className="text-sm">Fetching your location...</p>
+        )}
+      </div>
     </>
   );
 }

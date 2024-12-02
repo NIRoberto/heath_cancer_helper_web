@@ -1,5 +1,6 @@
+import L from "leaflet";
 import PropTypes from "prop-types";
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 
 const FlyToMap = ({ facility }) => {
   const map = useMap();
