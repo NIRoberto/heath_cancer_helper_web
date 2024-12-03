@@ -8,7 +8,7 @@ export const facilities = [
     hours: "Open 24/7",
     lat: -2.610871952493343,
     lng: 29.735679699735012,
-    distance: "15 km",
+   
   },
   {
     id: 2,
@@ -16,8 +16,9 @@ export const facilities = [
     description: "Meet a gynecologist to request a Pap smear screening test.",
     hotline: "250 788 304 005, Toll Free: 2023",
     lat: -1.9559477719260505,
+    hours: "Open 24/7",
     lng: 30.060433277110523,
-    distance: "10 km",
+   
   },
   {
     id: 3,
@@ -28,7 +29,7 @@ export const facilities = [
     hours: "7:00 AM - 9:00 PM",
     lat: -1.9677417668303634,
     lng: 30.162880536318568,
-    distance: "12 km",
+   
   },
   {
     id: 4,
@@ -38,7 +39,8 @@ export const facilities = [
     hotline: "3939, +250 788 123 200 (International Call)",
     lat: -1.9437029203029508,
     lng: 30.09529800893251,
-    distance: "8 km",
+    hours: "Open 24/7",
+   
   },
   {
     id: 5,
@@ -49,7 +51,7 @@ export const facilities = [
     hours: "24/7",
     lat: -1.9785858824069658,
     lng: 30.167913130118134,
-    distance: "6 km",
+   
   },
   {
     id: 6,
@@ -60,6 +62,6 @@ export const facilities = [
     hours: "Monday to Friday: 07:30 - 20:00, Weekends and Holidays: 08:00 - 13:00",
     lat: -1.9602401587536975,
     lng: 30.109841399600278,
-    distance: "5 km",
+   
   },
 ];

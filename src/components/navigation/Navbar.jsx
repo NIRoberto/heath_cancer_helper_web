@@ -66,8 +66,8 @@ const Navbar = ({ isBackground = false }) => {
             <a href="/" className="text-white/80 hover:text-white py-2 md:py-0">
               Services
             </a>
-            <a href="/" className="text-white/80 hover:text-white py-2 md:py-0">
-              MyDoctor
+            <a href="/TestimonialsPage" className="text-white/80 hover:text-white py-2 md:py-0">
+            TestimonialsPage
             </a>
             {/* Health Status Button for mobile/tablet */}
             <div className="md:hidden pt-4">
