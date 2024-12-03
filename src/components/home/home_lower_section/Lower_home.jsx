@@ -16,25 +16,60 @@ function Lower_home() {
   const [location, setLocation] = useState({ latitude: null, longitude: null }); // Store client location
   const sliderRef = useRef(null);
 
+  // useEffect(() => {
+  //   // Capture client's location
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(
+  //       (position) => {
+  //         setLocation({
+  //           latitude: position.coords.latitude,
+  //           longitude: position.coords.longitude,
+  //         });
+  //       },
+  //       (error) => {
+  //         console.error("Error fetching location:", error.message);
+  //       }
+  //     );
+  //   } else {
+  //     console.error("Geolocation is not supported by this browser.");
+  //   }
+  // }, []);
+
+
   useEffect(() => {
-    // Capture client's location
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          setLocation({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-          });
+          const { latitude, longitude } = position.coords;
+          setLocation({ latitude, longitude });
         },
         (error) => {
           console.error("Error fetching location:", error.message);
+          switch (error.code) {
+            case error.PERMISSION_DENIED:
+              console.error("Permission denied by user.");
+              break;
+            case error.POSITION_UNAVAILABLE:
+              console.error("Position unavailable.");
+              break;
+            case error.TIMEOUT:
+              console.error("Request timed out.");
+              break;
+            default:
+              console.error("Unknown error.");
+          }
+        },
+        {
+          enableHighAccuracy: true, // Request high accuracy for GPS
+          timeout: 10000, // 10 seconds timeout for fetching location
+          maximumAge: 0, // Prevent using cached location
         }
       );
     } else {
       console.error("Geolocation is not supported by this browser.");
     }
   }, []);
-
+  
   const settings = {
     infinite: true,
     slidesToShow: 1,

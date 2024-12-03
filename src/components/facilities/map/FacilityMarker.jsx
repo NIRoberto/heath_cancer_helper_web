@@ -1,6 +1,6 @@
 import L from "leaflet";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useState } from "react";
 import ReactDOMServer from "react-dom/server";
 import { CiLocationOn } from "react-icons/ci";
 import { Marker, Popup } from "react-leaflet";
@@ -15,38 +15,80 @@ const createFacilityIcon = (isSelected) =>
       <div
         style={{
           color: isSelected ? "red" : "blue",
-          fontSize: "30px", // Increase the font size here
+          fontSize: "30px",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          width: "40px", // Increase the width to accommodate the icon
-          height: "40px", // Increase the height
-          borderRadius: "50%", // Optional: make the icon circular
-          backgroundColor: "white", // Optional: white background for contrast
-          boxShadow: "0 0 5px rgba(0,0,0,0.3)", // Optional: add shadow to the icon
+          width: "40px",
+          height: "40px",
+          borderRadius: "50%",
+          backgroundColor: "white",
+          boxShadow: "0 0 5px rgba(0,0,0,0.3)",
         }}
       >
         <CiLocationOn />
       </div>
     ),
-    iconSize: [40, 40], // Set the icon size here (width and height)
-    iconAnchor: [20, 20], // Adjust the anchor position (center of the icon)
+    iconSize: [40, 40],
+    iconAnchor: [20, 20],
   });
 
 const FacilityMarker = ({ facility, selectedFacility, onSelect }) => {
-  // Access user location from context
-  const { location } = useLocation(); // Get the user's current location
+  const { location, setLocation } = useLocation(); // Get user's current location and setter
+
+  const [loadingLocation, setLoadingLocation] = useState(false);
+
+  // Handle enabling/re-enabling location access
+  const handleEnableLocation = () => {
+    setLoadingLocation(true);
+
+    // Use Geolocation API to get user's location
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        // Save the location in context or state
+        setLocation({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        });
+        toast.success("Location access enabled!");
+        setLoadingLocation(false);
+      },
+      (error) => {
+        // Handle errors (permission denied, timeout, etc.)
+        if (error.code === error.PERMISSION_DENIED) {
+            toast.error(
+              <>
+                Location access denied. Please allow it in your browser settings.
+                <br />
+                <a
+                  href="https://support.google.com/chrome/answer/142065?hl=en"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "blue", textDecoration: "underline" }}
+                >
+                  Learn how to enable location
+                </a>
+              </>
+            );
+          }
+          else if (error.code === error.POSITION_UNAVAILABLE) {
+          toast.error("Location information is unavailable.");
+        } else if (error.code === error.TIMEOUT) {
+          toast.error("Location request timed out. Try again.");
+        } else {
+          toast.error("An unknown error occurred while accessing location.");
+        }
+        setLoadingLocation(false);
+      }
+    );
+  };
 
   // Handle the "Get Directions" button click
   const handleGetDirections = () => {
     if (location.latitude && location.longitude) {
-      // Construct the Google Maps directions URL
       const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${location.latitude},${location.longitude}&destination=${facility.lat},${facility.lng}`;
-
-      // Open Google Maps with directions in a new tab
       window.open(googleMapsUrl, "_blank");
     } else {
-      // Show a toast notification if location is unavailable
       toast.error("Location access is required to get directions.");
     }
   };
@@ -55,7 +97,7 @@ const FacilityMarker = ({ facility, selectedFacility, onSelect }) => {
     <Marker
       key={facility.id}
       position={[facility.lat, facility.lng]}
-      icon={createFacilityIcon(facility === selectedFacility)} // Custom icon with selected facility highlighted
+      icon={createFacilityIcon(facility === selectedFacility)}
     >
       <Popup>
         <h3>{facility.name}</h3>
@@ -63,16 +105,25 @@ const FacilityMarker = ({ facility, selectedFacility, onSelect }) => {
         <p>Open {facility.hours}</p>
         <button
           className="mt-2 px-4 py-1 bg-amber-600 text-white rounded"
-          onClick={() => onSelect(facility)} // Select this facility
+          onClick={() => onSelect(facility)}
         >
           View Details
         </button>
         <button
           className="mt-2 px-4 py-1 bg-blue-600 text-white rounded"
-          onClick={handleGetDirections} // Open Google Maps with directions
+          onClick={handleGetDirections}
         >
           Get Directions
         </button>
+        {!location.latitude && !location.longitude && (
+          <button
+            className="mt-2 px-4 py-1 bg-green-600 text-white rounded"
+            onClick={handleEnableLocation}
+            disabled={loadingLocation}
+          >
+            {loadingLocation ? "Enabling Location..." : "Enable Location Access"}
+          </button>
+        )}
       </Popup>
     </Marker>
   );

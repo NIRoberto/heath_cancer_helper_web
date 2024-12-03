@@ -6,7 +6,6 @@ import SearchBar from "./SearchBar ";
 import { Clock, Filter } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
-import { useLocation } from "react-router-dom";
 import { calculateDistance } from "../../utils/distance";
 import { LocationContext } from "./../context/LocationContext";
 import { facilities } from "./facilities";
@@ -14,7 +13,7 @@ import { facilities } from "./facilities";
 const HealthFacilityFinder = () => {
   
   const { location } = useContext(LocationContext);
-  console.log(location);
+
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredFacilities, setFilteredFacilities] = useState(facilities);
   const [selectedFacility, setSelectedFacility] = useState(null);
