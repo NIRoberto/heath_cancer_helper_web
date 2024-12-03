@@ -1,16 +1,40 @@
 import FacilityList from "./FacilityList ";
 import FilterButton from "./FilterButton ";
-import MapView from "./MapView";
+import MapView from "./map/MapView";
 import Navbar from "../navigation/Navbar";
 import SearchBar from "./SearchBar ";
 import { Clock, Filter } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { useLocation } from "react-router-dom";
+import { calculateDistance } from "../../utils/distance";
+import { LocationContext } from "./../context/LocationContext";
 import { facilities } from "./facilities";
 
 const HealthFacilityFinder = () => {
+  
+  const { location } = useContext(LocationContext);
+  console.log(location);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredFacilities, setFilteredFacilities] = useState(facilities);
   const [selectedFacility, setSelectedFacility] = useState(null);
+  useEffect(() => {
+    if (location.latitude && location.longitude) {
+      // Sort facilities by distance
+      const facilitiesWithDistance = facilities.map((facility) => ({
+        ...facility,
+        distance: calculateDistance(
+          location.latitude,
+          location.longitude,
+          facility.lat,
+          facility.lng
+        ),
+      }));
+      facilitiesWithDistance.sort((a, b) => a.distance - b.distance);
+      setFilteredFacilities(facilitiesWithDistance);
+      setSelectedFacility(facilitiesWithDistance[0]);
+    }
+  }, [location]);
 
   const handleSearch = (query) => {
     setSearchQuery(query);
