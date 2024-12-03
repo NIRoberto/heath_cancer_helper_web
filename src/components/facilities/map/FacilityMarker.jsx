@@ -127,6 +127,7 @@ const FacilityMarker = ({ facility, selectedFacility, onSelect }) => {
             onClick={handleEnableLocation}
             disabled={loadingLocation}
           >
+            
             {loadingLocation ? "Enabling Location..." : "Enable Location Access"}
           </button>
         )}
