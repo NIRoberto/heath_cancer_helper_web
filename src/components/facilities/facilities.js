@@ -16,8 +16,8 @@ export const facilities = [
     description: "Meet a gynecologist to request a Pap smear screening test.",
     hotline: "250 788 304 005, Toll Free: 2023",
     lat: -1.9559477719260505,
-    hours: "Open 24/7",
     lng: 30.060433277110523,
+    hours: "Open 24/7",
    
   },
   {

@@ -32,7 +32,7 @@ function CancerRisks() {
   return (
     <div className="bg-[#F5F5F5] py-12">
       {/* Heading Section */}
-      <div className="flex flex-col sm:flex-row w-[90%] md:w-[80%] mx-auto mb-12 items-center gap-4 justify-center">
+      <div className="flex flex-col sm:flex-row w-[90%] md:w-[80%] mx-auto mb-8 items-center gap-4 justify-center">
         <div className="image">
           <img
             src={CancelRiskWarning}

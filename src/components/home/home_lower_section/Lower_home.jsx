@@ -71,7 +71,7 @@ function Lower_home() {
   }, []);
   
   const settings = {
-    infinite: true,
+    // infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
@@ -98,7 +98,7 @@ function Lower_home() {
   return (
     <>
       <nav className="navbar pt-10 flex justify-center">
-        <ul className="nav-list grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 justify-items-center">
+        <ul className="nav-list grid grid-cols-2 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-4 gap-4 justify-items-center">
           {navItems.map((item, index) => (
             <li key={item.to} className="nav-item">
               <NavLink
@@ -117,34 +117,37 @@ function Lower_home() {
         </ul>
       </nav>
 
-      <div className="pt-10 overflow-x-hidden">
-        <div className="slider-container">
+      <div className="pt-10 overflow-x-hidden max-h-fit border-2 border-gray-950">
+       
           <Slider {...settings} ref={sliderRef}>
             <GetScreened />
             <WhyScreening />
             <CancerRisks />
             <Symptom />
           </Slider>
-        </div>
+        
       </div>
 
-      <div className="flex items-center justify-center pb-4">
+      <div className="flex items-center justify-center pb-4   ">
         <span className="PlayFair text-[#BB8C1A] mx-auto w-fit custom-underline font-bold">
           <NavLink to="nearHospital">Visit nearest Facility</NavLink>
         </span>
       </div>
 
       {/* Display captured location */}
-      <div className="location-display mt-4 text-center">
+      {/* <div className="location-display mt-4 text-center">
         {location.latitude && location.longitude ? (
           <p className="text-sm">
             Your current location: Latitude: {location.latitude}, Longitude:{" "}
             {location.longitude}
+
+            
           </p>
         ) : (
           <p className="text-sm">Fetching your location...</p>
+          
         )}
-      </div>
+      </div> */}
     </>
   );
 }

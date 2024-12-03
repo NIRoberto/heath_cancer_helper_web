@@ -1,6 +1,5 @@
-
-import { NavLink } from "react-router-dom"; // Import NavLink
 import "./Button.css";
+import { NavLink } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
 const CustomButton = ({ text, to, isBold = false }) => {
@@ -8,7 +7,7 @@ const CustomButton = ({ text, to, isBold = false }) => {
     <NavLink
       to={to}
       className={({ isActive }) =>
-        `custom-button ${isBold ? "font-bold" : ""} ${
+        `custom-button ${isBold ? "font-bol" : ""} ${
           isActive ? "active-link" : ""
         }`
       }

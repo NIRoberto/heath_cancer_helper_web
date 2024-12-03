@@ -35,7 +35,7 @@ export default function App() {
         <Route path="symptoms" element={<Symptom />} />
       </Route>
       <Route path="/myHealth" element={<myHealthStatus />} />
-      <Route path="/TestimonialsPage" element={<TestimonialsPage />} />
+      <Route path="/patients_stories" element={<TestimonialsPage />} />
       <Route path="/nearHospital" element={<HealthFacilityFinder />} />
       {/* Auth Protected Routes */}
       {/* <Route element={<AuthRoute />}>

@@ -1,6 +1,6 @@
 import L from "leaflet";
 import PropTypes from "prop-types";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ReactDOMServer from "react-dom/server";
 import { CiLocationOn } from "react-icons/ci";
 import { Marker, Popup } from "react-leaflet";
@@ -34,18 +34,26 @@ const createFacilityIcon = (isSelected) =>
   });
 
 const FacilityMarker = ({ facility, selectedFacility, onSelect }) => {
-  const { location, setLocation } = useLocation(); // Get user's current location and setter
-
+  const { location, setLocation } = useLocation();
   const [loadingLocation, setLoadingLocation] = useState(false);
+  const markerRef = useRef(null);
 
-  // Handle enabling/re-enabling location access
+  // Effect to handle popup opening/closing based on selection
+  useEffect(() => {
+    if (markerRef.current) {
+      if (facility === selectedFacility) {
+        markerRef.current.openPopup();
+      } else {
+        markerRef.current.closePopup();
+      }
+    }
+  }, [selectedFacility, facility]);
+
   const handleEnableLocation = () => {
     setLoadingLocation(true);
 
-    // Use Geolocation API to get user's location
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        // Save the location in context or state
         setLocation({
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
@@ -54,24 +62,22 @@ const FacilityMarker = ({ facility, selectedFacility, onSelect }) => {
         setLoadingLocation(false);
       },
       (error) => {
-        // Handle errors (permission denied, timeout, etc.)
         if (error.code === error.PERMISSION_DENIED) {
-            toast.error(
-              <>
-                Location access denied. Please allow it in your browser settings.
-                <br />
-                <a
-                  href="https://support.google.com/chrome/answer/142065?hl=en"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ color: "blue", textDecoration: "underline" }}
-                >
-                  Learn how to enable location
-                </a>
-              </>
-            );
-          }
-          else if (error.code === error.POSITION_UNAVAILABLE) {
+          toast.error(
+            <>
+              Location access denied. Please allow it in your browser settings.
+              <br />
+              <a
+                href="https://support.google.com/chrome/answer/142065?hl=en"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "blue", textDecoration: "underline" }}
+              >
+                Learn how to enable location
+              </a>
+            </>
+          );
+        } else if (error.code === error.POSITION_UNAVAILABLE) {
           toast.error("Location information is unavailable.");
         } else if (error.code === error.TIMEOUT) {
           toast.error("Location request timed out. Try again.");
@@ -83,7 +89,6 @@ const FacilityMarker = ({ facility, selectedFacility, onSelect }) => {
     );
   };
 
-  // Handle the "Get Directions" button click
   const handleGetDirections = () => {
     if (location.latitude && location.longitude) {
       const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${location.latitude},${location.longitude}&destination=${facility.lat},${facility.lng}`;
@@ -95,6 +100,7 @@ const FacilityMarker = ({ facility, selectedFacility, onSelect }) => {
 
   return (
     <Marker
+      ref={markerRef}
       key={facility.id}
       position={[facility.lat, facility.lng]}
       icon={createFacilityIcon(facility === selectedFacility)}
@@ -103,12 +109,12 @@ const FacilityMarker = ({ facility, selectedFacility, onSelect }) => {
         <h3>{facility.name}</h3>
         <p>{facility.description}</p>
         <p>Open {facility.hours}</p>
-        <button
+        {/* <button
           className="mt-2 px-4 py-1 bg-amber-600 text-white rounded"
           onClick={() => onSelect(facility)}
         >
           View Details
-        </button>
+        </button> */}
         <button
           className="mt-2 px-4 py-1 bg-blue-600 text-white rounded"
           onClick={handleGetDirections}
