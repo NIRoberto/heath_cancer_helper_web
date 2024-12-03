@@ -8,18 +8,18 @@ import bgimg from "../../assets/images/bgimg.jpg";
 const HomePage = () => {
   return (
     <>
-      <div className="min-h-screen">
+      <div className="min-h-[90vh]">
         <Navbar />
 
         {/* Hero Section with Background */}
-        <div className="relative min-h-[120vh]">
+        <div className="relative min-h-[80vh]">
           {/* Background Image with Overlay */}
           <div className="absolute inset-0 z-0">
             <div className="absolute inset-0 bg-gradient-to-r from-gray-900/95 to-gray-900/20" />
             <img
               src={bgimg}
               alt="Background"
-              className="w-full h-full object-fill"
+              className="w-full h-full object-cover object-top"
             />
           </div>
 
@@ -27,13 +27,13 @@ const HomePage = () => {
           <div className="relative z-1 max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="pt-32 lg:pt-40 pb-20 lg:pb-28">
               <div className="max-w-2xl ml-[2.5%]">
-                <h1 className="text-5xl font-serif text-[#E6B12C] leading-tight mb-4 playFair">
+                <h1 className="text-8xl font-serif text-[#E6B12C] leading-tight mb-4 playFair">
                   Save Your Life
                 </h1>
                 <h2 className="text-4xl text-white/90  mb-6 playFair">
                   with Cervical cancer Screening
                 </h2>
-                <p className="text-[20px] text-white/80 mb-8 max-w-xl font-semibold">
+                <p className="text-[20px] text-white/80 mb-8 max-w-2xl ">
                   Due to delayed diagnosis, at least one woman dies of Cervical
                   cancer in just 2 minutes. If you are a woman aged between 20
                   and 80 years, you can consult your doctor and have the

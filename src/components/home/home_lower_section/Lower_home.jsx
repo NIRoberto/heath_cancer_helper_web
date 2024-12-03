@@ -16,27 +16,62 @@ function Lower_home() {
   const [location, setLocation] = useState({ latitude: null, longitude: null }); // Store client location
   const sliderRef = useRef(null);
 
+  // useEffect(() => {
+  //   // Capture client's location
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(
+  //       (position) => {
+  //         setLocation({
+  //           latitude: position.coords.latitude,
+  //           longitude: position.coords.longitude,
+  //         });
+  //       },
+  //       (error) => {
+  //         console.error("Error fetching location:", error.message);
+  //       }
+  //     );
+  //   } else {
+  //     console.error("Geolocation is not supported by this browser.");
+  //   }
+  // }, []);
+
+
   useEffect(() => {
-    // Capture client's location
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          setLocation({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-          });
+          const { latitude, longitude } = position.coords;
+          setLocation({ latitude, longitude });
         },
         (error) => {
           console.error("Error fetching location:", error.message);
+          switch (error.code) {
+            case error.PERMISSION_DENIED:
+              console.error("Permission denied by user.");
+              break;
+            case error.POSITION_UNAVAILABLE:
+              console.error("Position unavailable.");
+              break;
+            case error.TIMEOUT:
+              console.error("Request timed out.");
+              break;
+            default:
+              console.error("Unknown error.");
+          }
+        },
+        {
+          enableHighAccuracy: true, // Request high accuracy for GPS
+          timeout: 10000, // 10 seconds timeout for fetching location
+          maximumAge: 0, // Prevent using cached location
         }
       );
     } else {
       console.error("Geolocation is not supported by this browser.");
     }
   }, []);
-
+  
   const settings = {
-    infinite: true,
+    // infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
@@ -63,7 +98,7 @@ function Lower_home() {
   return (
     <>
       <nav className="navbar pt-10 flex justify-center">
-        <ul className="nav-list grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 justify-items-center">
+        <ul className="nav-list grid grid-cols-2 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-4 gap-4 justify-items-center">
           {navItems.map((item, index) => (
             <li key={item.to} className="nav-item">
               <NavLink
@@ -82,34 +117,37 @@ function Lower_home() {
         </ul>
       </nav>
 
-      <div className="pt-10 overflow-x-hidden">
-        <div className="slider-container">
+      <div className="pt-10 overflow-x-hidden max-h-fit border-2 border-gray-950">
+       
           <Slider {...settings} ref={sliderRef}>
             <GetScreened />
             <WhyScreening />
             <CancerRisks />
             <Symptom />
           </Slider>
-        </div>
+        
       </div>
 
-      <div className="flex items-center justify-center pb-4">
+      <div className="flex items-center justify-center pb-4   ">
         <span className="PlayFair text-[#BB8C1A] mx-auto w-fit custom-underline font-bold">
           <NavLink to="nearHospital">Visit nearest Facility</NavLink>
         </span>
       </div>
 
       {/* Display captured location */}
-      <div className="location-display mt-4 text-center">
+      {/* <div className="location-display mt-4 text-center">
         {location.latitude && location.longitude ? (
           <p className="text-sm">
             Your current location: Latitude: {location.latitude}, Longitude:{" "}
             {location.longitude}
+
+            
           </p>
         ) : (
           <p className="text-sm">Fetching your location...</p>
+          
         )}
-      </div>
+      </div> */}
     </>
   );
 }
