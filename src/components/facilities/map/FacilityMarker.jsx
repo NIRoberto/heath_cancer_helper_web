@@ -126,8 +126,7 @@ const FacilityMarker = ({ facility, selectedFacility, onSelect }) => {
             className="mt-2 px-4 py-1 bg-green-600 text-white rounded"
             onClick={handleEnableLocation}
             disabled={loadingLocation}
-          >
-            
+          > 
             {loadingLocation ? "Enabling Location..." : "Enable Location Access"}
           </button>
         )}
