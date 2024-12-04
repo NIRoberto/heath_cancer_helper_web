@@ -41,7 +41,7 @@ const HomePage = () => {
                 </p>
                 <CustomButton
                   to="nearHospital"
-                  text="Talk to MyDocta"
+                  text="nearest  facility"
                   isBold={true}
                 />
               </div>

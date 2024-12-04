@@ -49,9 +49,9 @@ const Navbar = ({ isBackground = false }) => {
         <div
           className={`${
             menuOpen
-              ? "translate-x-0 bg-gradient-to-r from-gray-900/95 to-gray-900/90"
+              ? "translate-x-0 bg-gradient-to-r from-gray-900/95 to-gray-900/90  h-[40rem]"
               : "translate-x-full"
-          } fixed top-0 right-0 h-[40rem] w-3/4 transform transition-transform duration-400 md:static md:flex md:items-center md:space-x-8 md:translate-x-0 md:bg-transparent md:w-auto rounded-3xl`}
+          } fixed top-0 right-0  w-3/4 transform transition-transform duration-400 md:static md:flex md:items-center md:space-x-8 md:translate-x-0 md:bg-transparent md:w-auto rounded-3xl`}
         >
           {menuOpen && (
             <div className="flex justify-end p-4">

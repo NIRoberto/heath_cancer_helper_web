@@ -117,7 +117,7 @@ function Lower_home() {
         </ul>
       </nav>
 
-      <div className="pt-10 overflow-x-hidden max-h-fit border-2 border-gray-950">
+      <div className="pt-10 overflow-x-hidden max-h-fit ">
        
           <Slider {...settings} ref={sliderRef}>
             <GetScreened />

@@ -57,7 +57,7 @@ export const TestimonialCard = ({ testimonial }) => {
             key={i}
             className={`w-5 h-5 ${
               i < testimonial.rating
-                ? 'fill-yellow-400 text-yellow-400'
+                ? 'fill-[#E6B12C] text-[#E6B12C]'
                 : 'text-gray-300'
             }`}
           />
@@ -65,14 +65,14 @@ export const TestimonialCard = ({ testimonial }) => {
       </div>
 
       {/* Testimonial Text */}
-      <blockquote className="text-gray-700 mb-6 border-l-4 border-blue-500 pl-4 italic">
+      <blockquote className="text-gray-700 mb-6 border-l-4 border-grey-900 pl-4 italic">
         {isExpanded
           ? testimonial.text
           : testimonial.text.slice(0, 100)} {/* Limit text to 100 characters */}
         {testimonial.text.length > 100 && (
           <button
             onClick={toggleReadMore}
-            className="text-blue-600 text-sm ml-2"
+            className="text-[#E6B12C] text-sm ml-2"
           >
             {isExpanded ? 'Read Less' : 'Read More'}
           </button>
@@ -92,7 +92,7 @@ export const TestimonialCard = ({ testimonial }) => {
           />
         </div>
         <div>
-          <div className="font-semibold text-blue-600">
+          <div className="font-semibold text-[#E6B12C]">
             {testimonial.author}
           </div>
           <div className="text-sm text-gray-600">{testimonial.status}</div>
