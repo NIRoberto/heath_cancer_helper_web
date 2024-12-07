@@ -76,7 +76,7 @@ function Lower_home() {
     slidesToScroll: 1,
     autoplay: true,
     speed: 2000,
-    autoplaySpeed: 4000,
+    autoplaySpeed: 6000,
     cssEase: "linear",
     beforeChange: (current, next) => {
       setActiveLink(navItems[next].to);
@@ -97,7 +97,7 @@ function Lower_home() {
 
   return (
     <>
-      <nav className="navbar pt-10 flex justify-center">
+      <nav className="navbar pt-10  flex justify-center">
         <ul className="nav-list grid grid-cols-2 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-4 gap-4 justify-items-center">
           {navItems.map((item, index) => (
             <li key={item.to} className="nav-item">
@@ -117,7 +117,7 @@ function Lower_home() {
         </ul>
       </nav>
 
-      <div className="pt-10 overflow-x-hidden max-h-fit ">
+      <div className="pt-6 overflow-x-hidden max-h-fit ">
        
           <Slider {...settings} ref={sliderRef}>
             <GetScreened />
